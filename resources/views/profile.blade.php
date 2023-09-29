@@ -17,8 +17,11 @@
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="{{ asset('admin/img/undraw_profile.svg') }}">
-                    <span class="font-weight-bold">{{ auth()->user()->full_name }}</span>
+                    {{-- <img class="rounded-circle mt-5" width="150px"
+                        src="{{ asset('storage/user_image/cfV1gV7PjTTQWDVROCutgp3vnlLmYSme2a0NBmIL.png') }}"> --}}
+
+                    <img src="{{ asset(auth()->user()->image) }}" width="150px">
+                    <span class="font-weight-bold">{{ auth()->user()->name }}</span>
                     <span class="text-black-50"><i>Role:
                             {{ auth()->user()->roles
                                 ? auth()->user()->roles->pluck('name')->first()
@@ -36,29 +39,29 @@
                         @csrf
                         <div class="row mt-2">
                             <div class="col-md-4">
-                                <label class="labels">First Name</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror"
-                                    name="first_name" placeholder="First Name"
-                                    value="{{ old('first_name') ? old('first_name') : auth()->user()->first_name }}">
-
-                                @error('first_name')
+                                <label class="labels">Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" placeholder="Name"
+                                    value="{{ old('name') ? old('name') : auth()->user()->name }}">
+                                @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label class="labels">Last Name</label>
-                                <input type="text" name="last_name"
-                                    class="form-control @error('last_name') is-invalid @enderror"
-                                    value="{{ old('last_name') ? old('last_name') : auth()->user()->last_name }}"
-                                    placeholder="Last Name">
+                                <label class="labels">Email</label>
+                                <input type="text" name="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    value="{{ old('email') ? old('email') : auth()->user()->email }}" placeholder="Email"
+                                    disabled>
 
-                                @error('last_name')
+                                @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4">
                                 <label class="labels">Mobile Number</label>
-                                <input type="text" class="form-control @error('mobile_number') is-invalid @enderror" name="mobile_number"
+                                <input type="text" class="form-control @error('mobile_number') is-invalid @enderror"
+                                    name="mobile_number"
                                     value="{{ old('mobile_number') ? old('mobile_number') : auth()->user()->mobile_number }}"
                                     placeholder="Mobile Number">
                                 @error('mobile_number')
@@ -66,6 +69,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-button" type="submit">Update Profile</button>
                         </div>
@@ -84,21 +88,27 @@
                         <div class="row mt-2">
                             <div class="col-md-4">
                                 <label class="labels">Current Password</label>
-                                <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror" placeholder="Current Password" required>
+                                <input type="password" name="current_password"
+                                    class="form-control @error('current_password') is-invalid @enderror"
+                                    placeholder="Current Password" required>
                                 @error('current_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4">
                                 <label class="labels">New Password</label>
-                                <input type="password" name="new_password" class="form-control @error('new_password') is-invalid @enderror" required placeholder="New Password">
+                                <input type="password" name="new_password"
+                                    class="form-control @error('new_password') is-invalid @enderror" required
+                                    placeholder="New Password">
                                 @error('new_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4">
                                 <label class="labels">Confirm Password</label>
-                                <input type="password" name="new_confirm_password" class="form-control @error('new_confirm_password') is-invalid @enderror" required placeholder="Confirm Password">
+                                <input type="password" name="new_confirm_password"
+                                    class="form-control @error('new_confirm_password') is-invalid @enderror" required
+                                    placeholder="Confirm Password">
                                 @error('new_confirm_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -112,8 +122,5 @@
             </div>
 
         </div>
-
-
-
     </div>
 @endsection

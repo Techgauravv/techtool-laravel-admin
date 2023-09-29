@@ -1,24 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Users List')
+@section('title', 'Clients List')
 
 @section('content')
     <div class="container-fluid">
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Users</h1>
+            <h1 class="h3 mb-0 text-gray-800">Clients</h1>
             <div class="row">
-                <div class="col-md-6">
-                    <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">
+                <div class="col-md-12">
+                    <a href="{{ route('clients.create') }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-plus"></i> Add New
                     </a>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <a href="{{ route('users.export') }}" class="btn btn-sm btn-success">
                         <i class="fas fa-check"></i> Export To Excel
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -35,41 +35,35 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th width="20%">Name</th>
-                                <th width="25%">Email</th>
-                                <th width="15%">Mobile</th>
-                                <th width="15%">Role</th>
+                                <th width="20%">Client</th>
                                 <th width="15%">Status</th>
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($clients as $client)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->mobile_number }}</td>
-                                    <td>{{ $user->roles ? $user->roles->pluck('name')->first() : 'N/A' }}</td>
+                                    <td>{{ $client->client_name }}</td>
                                     <td>
-                                        @if ($user->status == 0)
+                                        @if ($client->status == 0)
                                             <span class="badge badge-danger">Inactive</span>
-                                        @elseif ($user->status == 1)
+                                        @elseif ($client->status == 1)
                                             <span class="badge badge-success">Active</span>
                                         @endif
                                     </td>
                                     <td style="display: flex">
-                                        @if ($user->status == 0)
-                                            <a href="{{ route('users.status', ['user_id' => $user->id, 'status' => 1]) }}"
+                                        @if ($client->status == 0)
+                                            <a href="{{ route('clients.status', ['client_id' => $client->id, 'status' => 1]) }}"
                                                 class="btn btn-success m-2">
                                                 <i class="fa fa-check"></i>
                                             </a>
-                                        @elseif ($user->status == 1)
-                                            <a href="{{ route('users.status', ['user_id' => $user->id, 'status' => 0]) }}"
+                                        @elseif ($client->status == 1)
+                                            <a href="{{ route('clients.status', ['client_id' => $client->id, 'status' => 0]) }}"
                                                 class="btn btn-danger m-2">
                                                 <i class="fa fa-ban"></i>
                                             </a>
                                         @endif
-                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}"
+                                        <a href="{{ route('clients.edit', ['client' => $client->id]) }}"
                                             class="btn btn-primary m-2">
                                             <i class="fa fa-pen"></i>
                                         </a>
@@ -83,14 +77,12 @@
                         </tbody>
                     </table>
 
-                    {{ $users->links() }}
+                    {{-- {{ $clients->links() }} --}}
                 </div>
             </div>
         </div>
-
     </div>
-
-    @include('users.delete-modal')
+    {{-- @include('clients.delete-modal') --}}
 
 @endsection
 

@@ -13,7 +13,6 @@
                 <p class="text-gray-500 mb-0">It looks like you are trying to access wrong page!</p>
                 <a href="{{route('home')}}">← Back to Dashboard</a>
             </div>
-
         </div>
     @endsection
 @endauth
